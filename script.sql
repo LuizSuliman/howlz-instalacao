@@ -26,28 +26,16 @@ CREATE TABLE Usuario (
 	fkEmpresa INT,
 	fkTipoUsuario INT,
 	fkGestor INT,
-	PRIMARY KEY (idUsuario),
-	CONSTRAINT fkUsuarioGestor
-		FOREIGN KEY (fkGestor)
-		REFERENCES Usuario (idUsuario),
-	CONSTRAINT fkUsuarioEmpresa
-		FOREIGN KEY (fkEmpresa)
-		REFERENCES Empresa (idEmpresa),
-	CONSTRAINT fkUsuarioTipoUsuario
-		FOREIGN KEY (fkTipoUsuario)
-		REFERENCES TipoUsuario (idTipoUsuario)
+	PRIMARY KEY (idUsuario)
 );
 
 CREATE TABLE Computador (
 	idComputador INT AUTO_INCREMENT,
 	codigoPatrimonio VARCHAR(100),
-	numeroSerial VARCHAR(100),
+	numeroSerial VARCHAR(500),
 	sistemaOperacional VARCHAR(150),
 	fkEmpresa INT,
-	PRIMARY KEY (idComputador),
-	CONSTRAINT fkComputadorEmpresa
-		FOREIGN KEY (fkEmpresa)
-		REFERENCES Empresa (idEmpresa)
+	PRIMARY KEY (idComputador)
 );
 
 CREATE TABLE AssociacaoComputadorUsuario (
@@ -56,13 +44,7 @@ CREATE TABLE AssociacaoComputadorUsuario (
 	fkComputador INT,
 	dataAssociacao DATETIME,
 	dataDesassociacao DATETIME,
-	PRIMARY KEY (idAssociacao, fkUsuario, fkComputador),
-	CONSTRAINT fkAssociacaoComputadorUsuarioUsuario
-		FOREIGN KEY (fkUsuario)
-		REFERENCES Usuario (idUsuario),
-	CONSTRAINT fkAssociacaoComputadorUsuarioComputador
-		FOREIGN KEY (fkComputador)
-		REFERENCES Computador (idComputador)
+	PRIMARY KEY (idAssociacao, fkUsuario, fkComputador)
 );
 
 CREATE TABLE Janela (
@@ -73,10 +55,7 @@ CREATE TABLE Janela (
 	visibilidade TINYINT,
 	dataHora DATETIME,
 	fkComputador INT,
-	PRIMARY KEY (idJanela),
-	CONSTRAINT fkJanelaComputador
-		FOREIGN KEY (fkComputador)
-		REFERENCES Computador (idComputador)
+	PRIMARY KEY (idJanela)
 );
 
 CREATE TABLE TipoComponente (
@@ -97,13 +76,7 @@ CREATE TABLE TipoMonitoramentoComponente (
 	nome VARCHAR(45),
 	fkTipoComponente INT,
 	fkUnidadeMedida INT,
-	PRIMARY KEY (idTipoMonitoramentoComponente),
-	CONSTRAINT fkTipoMonitoramentoTipoComponente
-		FOREIGN KEY (fkTipoComponente)
-		REFERENCES TipoComponente (idTipoComponente),
-	CONSTRAINT fkTipoMonitoramentoComponenteUnidadeMedida
-		FOREIGN KEY (fkUnidadeMedida)
-		REFERENCES UnidadeMedida (idUnidadeMedida))
+	PRIMARY KEY (idTipoMonitoramentoComponente))
 ;
 
 CREATE TABLE Componente (
@@ -112,13 +85,7 @@ CREATE TABLE Componente (
 	identificador VARCHAR(100),
 	fkComputador INT,
 	fkTipoComponente INT,
-	PRIMARY KEY (idComponente),
-	CONSTRAINT fkComponenteComputador
-		FOREIGN KEY (fkComputador)
-		REFERENCES Computador (idComputador),
-	CONSTRAINT fkComponenteTipoComponente
-		FOREIGN KEY (fkTipoComponente)
-		REFERENCES TipoComponente (idTipoComponente)
+	PRIMARY KEY (idComponente)
 );
 
 CREATE TABLE MonitoramentoComponente (
@@ -127,13 +94,7 @@ CREATE TABLE MonitoramentoComponente (
 	valor DECIMAL(20,2),
 	fkTipoMonitoramentoComponente INT,
 	fkComponente INT,
-	PRIMARY KEY (idMonitoramentoComponente),
-	CONSTRAINT fkMonitoramentoComponenteTipoMonitoramentoComponente
-		FOREIGN KEY (fkTipoMonitoramentoComponente)
-		REFERENCES TipoMonitoramentoComponente (idTipoMonitoramentoComponente),
-	CONSTRAINT fkMonitoramentoComponenteComponente
-		FOREIGN KEY (fkComponente)
-		REFERENCES Componente (idComponente)
+	PRIMARY KEY (idMonitoramentoComponente)
 );
 
 CREATE TABLE Processo (
@@ -142,10 +103,7 @@ CREATE TABLE Processo (
 	nome VARCHAR(100),
 	dataHora DATETIME,
 	fkComputador INT,
-	PRIMARY KEY (idProcesso),
-	CONSTRAINT fkProcessoComputador
-		FOREIGN KEY (fkComputador)
-		REFERENCES Computador (idComputador)
+	PRIMARY KEY (idProcesso)
 );
 
 CREATE TABLE MonitoramentoProcesso (
@@ -155,16 +113,7 @@ CREATE TABLE MonitoramentoProcesso (
 	fkProcesso INT,
 	fkUnidadeMedida INT,
 	fkTipoComponente INT,
-	PRIMARY KEY (idMonitoramentoProcesso),
-	CONSTRAINT fkMonitoramentoProcessoProcesso
-		FOREIGN KEY (fkProcesso)
-		REFERENCES Processo (idProcesso),
-	CONSTRAINT fkMonitoramentoProcessoUnidadeMedida
-		FOREIGN KEY (fkUnidadeMedida)
-		REFERENCES UnidadeMedida (idUnidadeMedida),
-	CONSTRAINT fkMonitoramentoProcessoTipoComponente
-		FOREIGN KEY (fkTipoComponente)
-		REFERENCES TipoComponente (idTipoComponente))
+	PRIMARY KEY (idMonitoramentoProcesso))
 ;
 
 CREATE TABLE TipoAlerta (
@@ -180,16 +129,7 @@ CREATE TABLE Alerta (
 	fkTipoAlerta INT,
 	fkTipoMonitoramentoComponente INT,
     fkEmpresa INT,
-	PRIMARY KEY (idAlerta),
-	CONSTRAINT fk_Alerta_TipoAlerta1
-		FOREIGN KEY (fkTipoAlerta)
-		REFERENCES TipoAlerta (idTipoAlerta),
-	CONSTRAINT fkAlertaTipoMonitoramentoComponente
-		FOREIGN KEY (fkTipoMonitoramentoComponente)
-		REFERENCES TipoMonitoramentoComponente (idTipoMonitoramentoComponente),
-	CONSTRAINT fkAlertaEmoresa
-		FOREIGN KEY (fkEmpresa)
-		REFERENCES Empresa (idEmpresa)
+	PRIMARY KEY (idAlerta)
 );
 
 -- 	INSERTS OBRIGATÓRIOS:
