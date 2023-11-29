@@ -8,7 +8,7 @@ echo "    \ \ \ \ \  /\ \L\ \ \ \ \_/ \_/ \  \_\ \_  // /____ "
 echo "     \ \_\ \_\ \ \____/  \ \___x___/   /\____\ /\_______\ "
 echo "      \/_/\/_/  \/___/    \/__//__/    \/____/ \/_______/ "
 echo
-echo "Seja bem-vindo ao Intalador da HowlZ!"
+echo "Seja bem-vindo ao Instalador da HowlZ!"
 echo "Vamos preparar o ambiente para a nossa aplicação."
 echo
 sleep 3
@@ -20,14 +20,14 @@ echo "2. Java (JRE 17)"
 echo "3. Docker (Container MySQL 5.7)"
 echo "4. Aplicação Howlz (.jar)"
 echo
-echo "Não se preocupe, nós cuidamos da intalação destes componentes automaticamente"
-echo "Por isso, é recomendado que você execute esse intalador com permissões de administrador (sudo)"
+echo "Não se preocupe, nós cuidamos da instalação destes componentes automaticamente"
+echo "Por isso, é recomendado que você execute esse instalador com permissões de administrador (sudo)"
 echo
 echo "Deseja prosseguir com a instalação? (s/n)"
 read getPermissao
 
 if [ \"$getPermissao\" == \"s\" ]; then
-    echo "Iniciando intalação..."
+    echo "Iniciando instalação..."
 
     echo "Atualizando sistema..."
     sudo apt update &>/dev/null && sudo apt upgrade -y &>/dev/null
